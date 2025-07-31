@@ -1,12 +1,60 @@
-# React + Vite
+# 실습 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- 여행 다이어리 등록 앱
 
-Currently, two official plugins are available:
+## 📚 구현할 페이지 구성
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. SelectPlacePage
 
-## Expanding the ESLint configuration
+- 여행지를 선택하는 페이지
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `<select>` 또는 라디오 버튼으로 선택 (예: 제주도, 부산, 강릉 등)
+
+- "다음" 버튼 클릭 시 WriteDiaryPage로 선택한 지역을 전달
+
+### 2. WriteDiaryPage
+
+- 전달받은 지역 정보를 상단에 표시
+
+- `<textarea>`를 통해 다이어리 작성
+
+- "완료" 버튼 클릭 시 PreviewPage로 지역 + 다이어리 내용을 함께 전달
+
+### 3. PreviewPage
+
+- 선택한 지역과 다이어리 내용을 출력
+
+- "홈으로" 버튼을 누르면 처음으로 돌아감
+
+### 🛠 기술 요구사항
+
+기능	|   설명
+라우팅  |	react-router-dom을 사용하여 페이지 전환 구현    |
+값 전달	navigate(path, { state })를 활용하여 여러 값 전달
+상태 관리   |	useState로 사용자 입력값 제어
+예외 처리   |	입력이 없을 경우 alert 띄우고 진행 막기
+데이터 검증 |	마지막 페이지(PreviewPage)에 state가 없을 경우 홈으로 리디렉션
+
+### 🎯 추가 도전 과제 (선택)
+선택한 지역에 따라 다르게 보여지는 배경 이미지 넣기
+
+다이어리 내용 글자 수 제한 및 실시간 글자 수 카운트 표시
+
+입력한 데이터들을 localStorage에 저장해서 새로고침해도 남아 있게 만들기
+
+### 🔧 예시 흐름
+
+[SelectPlacePage]
+↓ 선택한 지역: 강릉
+[WriteDiaryPage]
+↓ 작성한 내용: 강릉 바다는 최고야!
+[PreviewPage]
+→ "여행지: 강릉"
+→ "내용: 강릉 바다는 최고야!"
+
+
+## 프로젝트 후기
+
+- `select` 태그를 이용하여 사용자에게 아이템 선택 UI를 제공하는 방법을 알게 되었고, `textarea`태그를 통해 다량의 문자열 입력을 받는 방법을 알게 되었다.
+
+- `window.localStorage`를 통해서 `setItem`이나 `getItem`으로 데이터를 임시로 저장하고 가져오는 방법을 알게 되었다.
